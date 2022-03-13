@@ -13,11 +13,11 @@ export default class ShaderGraph {
     static allNodes: ShaderNode[][] = [];
 
     static searchNodes (graphPath: string) {
-        let contentStr = fs.readFileSync(graphPath, 'utf-8');
-        let content = getJsonObject(contentStr);
+        let contentStr = fs.readFileSync(graphPath, 'utf-8');//读取文件
+        let content = getJsonObject(contentStr);//转成json对象
         if (!content) return;
 
-        let properties: ShaderPropery[] = content.m_SerializedProperties.map(d => new ShaderPropery(d));
+        let properties: ShaderPropery[] = content.m_SerializedProperties.map(d => new ShaderPropery(d));//找到所有属性
         let nodeMap: Map<string, ShaderNode> = new Map;
 
         let propertyNodeMap: Map<ShaderPropery, PropertyNode> = new Map;
@@ -101,11 +101,11 @@ export default class ShaderGraph {
 
     static decode (path: string) {
         
-        resetGlobalShaderSlotID();
+        resetGlobalShaderSlotID();//重置全局材质id
 
         this.allNodes.length = 0;
 
-        let res = this.searchNodes(path);
+        let res = this.searchNodes(path);//拿到所有shadergraph文件
         if (!res) {
             return;
         }

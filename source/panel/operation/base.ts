@@ -65,6 +65,7 @@ export class ShaderNode {
     beforeGenreateCode () {
     }
 
+    /**添加依赖 */
     addDependency (dep) {
         if (dep === this) {
             return;

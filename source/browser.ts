@@ -17,8 +17,8 @@ exports.methods = {
     },
 
     async convert (src: string, dst: string, baseDir: string) {
-        ShaderGraph.subgraphPath = baseDir;
-        let content = ShaderGraph.decode(src);
+        ShaderGraph.subgraphPath = baseDir;//得到shadergraph目录
+        let content = ShaderGraph.decode(src);//开始转换
         fs.ensureDirSync(path.dirname(dst))
         fs.writeFileSync(dst, content);
 
