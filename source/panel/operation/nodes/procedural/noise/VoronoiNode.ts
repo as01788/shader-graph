@@ -13,8 +13,8 @@ export default class VoronoiNode extends ShaderNode {
             vec2 f = frac(uvc);
             float t = 8.0;
             vec3 res = vec3(8.0,.0,.0);
-            float x = .0;
-            float y = .0;
+            float vx = .0;
+            float vy = .0;
             for(float y=-1.;y<=1.;y++){
                 for(float x=-1.;x<=1.;x++){
                     vec2 lattice = vec2(x,y);
@@ -29,13 +29,13 @@ export default class VoronoiNode extends ShaderNode {
                     float d = distance(lattice + ${angle},f);
                     if(d < res.x){
                         res = vec3(d,offset.x,offset.y);
-                        x = res.x;
-                        y = res.y;
+                        vx = res.x;
+                        vy = res.y;
                     }
                 }
             }
         `;
 
-        return data;
+        return `${data}\r\n${this.getOutputVarDefine(0)}=vx;\r\n${this.getOutputVarDefine(1)}=vy`;
     }
 }
